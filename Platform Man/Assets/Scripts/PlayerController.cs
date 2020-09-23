@@ -12,13 +12,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 1;
 	[SerializeField] float jumpForce = 1;
 	[SerializeField] float fallingVelocityJumpThreshold = 0.2f;
+	[SerializeField] bool isBlock;
 	public Vector2 velocity;
+	public bool isPlayable = false;
+
+	private void Start()
+	{
+		if(!isBlock) { isPlayable = true; }
+	}
+
 
 	//Compensates for the height of the collider 
 	float distToGround;
 
 	Rigidbody2D rigidbody;
-	bool isOnGround = false;
 
 	private void Awake()
 	{
@@ -28,16 +35,18 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
-		
-		//Move Left and Right
-		float horizontalInput = Input.GetAxis("Horizontal");
-		transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+		if (isPlayable)
+		{
+			//Move Left and Right
+			float horizontalInput = Input.GetAxis("Horizontal");
+			transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+		}
 	}
 
 	private void FixedUpdate()
 	{
 		//Jump
-		if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+		if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !isBlock)
 		{
 			GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 		}
