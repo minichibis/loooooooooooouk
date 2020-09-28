@@ -24,4 +24,9 @@ public class LevelController : MonoBehaviour
     {
         SceneManager.LoadScene(levels[level]);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
