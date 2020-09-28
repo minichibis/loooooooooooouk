@@ -13,7 +13,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 1;
 	[SerializeField] float jumpForce = 1;
 	[SerializeField] float fallingVelocityJumpThreshold = 0.2f;
-	[SerializeField] bool isBlock;
+	[SerializeField] GameObject lineOfSiteArrow;
+	public bool isBlock;
+	[SerializeField] Transform eyes;
+	public MouseDetector mouseDetector;
+	public static PlayerController mousedOverBlock;
 	public Vector2 velocity;
 	public bool isPlayable = true;
 	
@@ -26,7 +30,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if(!isBlock) { isPlayable = true; }
 	}
-
 
 	//Compensates for the height of the collider 
 	float distToGround = 1.15f;
@@ -53,17 +56,19 @@ public class PlayerController : MonoBehaviour
 			rigidbody.gravityScale = gravy;
 			pinktiles.color = Color.white;
 			greytiles.color = Color.clear;
-		} else{
+			if(Input.GetMouseButtonDown(0)) { TransformOther(); }
+		} 
+		else
+		{
 			//for use with transforming
 			rigidbody.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
 			rigidbody.gravityScale = 0;
 			pinktiles.color = Color.clear;
 			greytiles.color = Color.white;
 		}
+
+		if (Input.GetMouseButtonUp(0)) { lineOfSiteArrow.SetActive(false); }
 	}
-	
-	//variable for testing purposes. expendable
-	public bool canTransform = true;
 
 	private void FixedUpdate()
 	{
@@ -84,6 +89,37 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Z) && canTransform) isPlayable = !isPlayable;
 	}
 
+	//Shoots a raycast towards the mouse pointer and transforms a block into a player.
+	void TransformOther()
+	{
+		//Determine direction from eyes to mouse position;
+		Vector3 mousePosition;
+		mousePosition = Input.mousePosition;
+		mousePosition.z = 0.0f;
+		mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+		Vector3 shootDirection = mousePosition - eyes.position;
+
+		//Shoots a raycast toward mouse position
+		RaycastHit2D hit = Physics2D.Raycast(eyes.position, shootDirection);
+		lineOfSiteArrow.gameObject.SetActive(true);
+		lineOfSiteArrow.transform.localScale = new Vector3(Vector2.Distance(eyes.position, mousePosition), 1,1);
+		float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+		lineOfSiteArrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		if (hit)
+		{
+			PlayerController otherBlock = hit.transform.GetComponentInParent<PlayerController>();
+			if (otherBlock)
+			{
+				if (otherBlock.mouseDetector.isMousedOver && !otherBlock.isPlayable)
+				{
+					otherBlock.isPlayable = !otherBlock.isPlayable;
+				}
+			}
+		}
+	}
+
+	//variable for testing purposes. expendable
+	public bool canTransform = true;
 	//Checks if there is a collider under the player
 	bool IsGrounded()
 	{
@@ -97,4 +133,5 @@ public class PlayerController : MonoBehaviour
 		}
 		return false;
 	}
+
 }
