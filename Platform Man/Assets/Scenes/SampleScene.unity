@@ -913,7 +913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899436604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1348114218}
@@ -1123,6 +1123,7 @@ GameObject:
   - component: {fileID: 1348114220}
   - component: {fileID: 1348114219}
   - component: {fileID: 1348114222}
+  - component: {fileID: 1348114223}
   m_Layer: 0
   m_Name: DefaultTilemap
   m_TagString: Untagged
@@ -1358,6 +1359,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1348114223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348114217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d488fe34f86592f40953c82d2f7100b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1633251159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1588,7 @@ MonoBehaviour:
   speed: 6.5
   jumpForce: 12
   fallingVelocityJumpThreshold: 0.2
+  isBlock: 0
   velocity: {x: 0, y: 0}
   isPlayable: 1
   coyoteframes: 0
@@ -1609,7 +1623,7 @@ GameObject:
   - component: {fileID: 1799024945}
   - component: {fileID: 1799024946}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Block Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1645,6 +1659,7 @@ MonoBehaviour:
   speed: 6.5
   jumpForce: 12
   fallingVelocityJumpThreshold: 0.2
+  isBlock: 1
   velocity: {x: 0, y: 0}
   isPlayable: 1
   coyoteframes: 0
