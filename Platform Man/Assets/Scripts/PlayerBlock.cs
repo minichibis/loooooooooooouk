@@ -8,7 +8,7 @@ public class PlayerBlock : MonoBehaviour
 
 	private void Start()
 	{
-		controller = GetComponent<PlayerController>();
+		controller = GetComponentInParent<PlayerController>();
 	}
 	private void OnMouseDown()
 	{

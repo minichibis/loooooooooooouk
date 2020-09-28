@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 1;
 	[SerializeField] float jumpForce = 1;
 	[SerializeField] float fallingVelocityJumpThreshold = 0.2f;
-	//[SerializeField] bool isBlock;
+	[SerializeField] bool isBlock;
 	public Vector2 velocity;
 	public bool isPlayable = true;
 	
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
-		//if(!isBlock) { isPlayable = true; }
+		if(!isBlock) { isPlayable = true; }
 	}
 
 
