@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 9159063797547574936}
   - component: {fileID: 9159063797547574941}
   - component: {fileID: 2553307462183057224}
+  - component: {fileID: 4210891472771867635}
   m_Layer: 0
   m_Name: Block 1
   m_TagString: Untagged
@@ -317,7 +318,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
 --- !u!50 &9159063797547574941
 Rigidbody2D:
@@ -353,6 +354,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMousedOver: 0
+--- !u!66 &4210891472771867635
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159063797547574938}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 1
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 9159063797547574936}
+    m_ColliderPaths:
+    - - X: -40000000
+        Y: 10000000
+      - X: -50000000
+        Y: 10000000
+      - X: -50000000
+        Y: 0
+      - X: -10000000
+        Y: 0
+      - X: -10000000
+        Y: 10000000
+      - X: 0
+        Y: 10000000
+      - X: 0
+        Y: 20000000
+      - X: -40000000
+        Y: 20000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 0, y: 2}
+      - {x: -4, y: 2}
+      - {x: -4, y: 1}
+      - {x: -5, y: 1}
+      - {x: -5, y: 0}
+      - {x: -1, y: 0}
+  m_VertexDistance: 0.0005
 --- !u!1 &9159063797987565967
 GameObject:
   m_ObjectHideFlags: 0

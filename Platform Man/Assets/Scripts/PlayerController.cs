@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 		rigidbody =  GetComponentInChildren<Rigidbody2D>();
 		//distToGround = GetComponent<Collider2D>().bounds.extents.y;
 	}
-
+	
 	private void Update()
 	{
 		if (isPlayable)
