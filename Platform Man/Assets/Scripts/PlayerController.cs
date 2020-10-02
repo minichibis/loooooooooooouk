@@ -11,7 +11,7 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 1;
-	[SerializeField] float jumpForce = 1;
+	[SerializeField] float jumpForce = 1.75f;
 	[SerializeField] float fallingVelocityJumpThreshold = 0.2f;
 	[SerializeField] GameObject lineOfSiteArrow;
 	public bool isBlock;
@@ -50,7 +50,11 @@ public class PlayerController : MonoBehaviour
 		{
 			//Move Left and Right
 			float horizontalInput = Input.GetAxis("Horizontal");
-			transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+			RaycastHit2D[] hitsys = new RaycastHit2D[999];
+			int hitnum = rigidbody.Cast(new Vector2(horizontalInput, 0), hitsys, 0.05f);
+			if (hitnum == 0){
+				transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+			}
 			//for use with transforming
 			rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 			rigidbody.gravityScale = gravy;
@@ -86,7 +90,7 @@ public class PlayerController : MonoBehaviour
 			coyoteframes = 0;
 		}
 		
-		if (Input.GetKeyDown(KeyCode.Z) && canTransform) isPlayable = !isPlayable;
+		//if (Input.GetKeyDown(KeyCode.Z) && canTransform) isPlayable = !isPlayable;
 	}
 
 	//Shoots a raycast towards the mouse pointer and transforms a block into a player.
