@@ -25,10 +25,13 @@ public class PlayerController : MonoBehaviour
 	public int coyotethresh = 3;
 	
 	public int gravy = 3;
+	
+	//public int layerr = 8;
 
 	private void Start()
 	{
 		if(!isBlock) { isPlayable = true; }
+		//transform.gameObject.layer = layerr;
 	}
 
 	//Compensates for the height of the collider 
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
 			float horizontalInput = Input.GetAxis("Horizontal");
 			RaycastHit2D[] hitsys = new RaycastHit2D[999];
 			int hitnum = rigidbody.Cast(new Vector2(horizontalInput, 0), hitsys, 0.05f);
-			if (hitnum == 0){
+			if (hitnum == 0 || hitsys[0].transform.gameObject.tag == "Finish"){
 				transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 			}
 			//for use with transforming
@@ -72,6 +75,8 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetMouseButtonUp(0)) { lineOfSiteArrow.SetActive(false); }
+		
+		if(rigidbody.transform.position.y < -10) Destroy(gameObject);
 	}
 
 	private void FixedUpdate()
@@ -104,7 +109,7 @@ public class PlayerController : MonoBehaviour
 		Vector3 shootDirection = mousePosition - eyes.position;
 
 		//Shoots a raycast toward mouse position
-		RaycastHit2D hit = Physics2D.Raycast(eyes.position, shootDirection);
+		RaycastHit2D hit = Physics2D.Raycast(eyes.position, shootDirection);//, layerr);
 		lineOfSiteArrow.gameObject.SetActive(true);
 		lineOfSiteArrow.transform.localScale = new Vector3(Vector2.Distance(eyes.position, mousePosition), 1,1);
 		float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
