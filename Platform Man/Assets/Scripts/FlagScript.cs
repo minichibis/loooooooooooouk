@@ -11,7 +11,6 @@ public class FlagScript : MonoBehaviour
 {
     LevelController changeLevel;
     public int nextLevel;
-    private bool triggered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +18,12 @@ public class FlagScript : MonoBehaviour
         changeLevel = FindObjectOfType<LevelController>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Flag Touched");
 
-        if (other.CompareTag("Player") && !triggered)
+        if (collision.CompareTag("Player"))
         {
-            triggered = true;
             changeLevel.ChangeLevel(nextLevel);
         }
     }

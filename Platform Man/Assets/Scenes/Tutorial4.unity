@@ -1748,6 +1748,11 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[4].x
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 4210891472771867635, guid: efc989a92221c48478bc20ed78061755,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9159063796551434369, guid: efc989a92221c48478bc20ed78061755,
         type: 3}
       propertyPath: isPlayable
