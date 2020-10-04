@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 	public Vector2 velocity;
 	public bool isPlayable = true;
 	
-	public int coyoteframes = 0;
+	public int coyoteframes = 99;
 	public int coyotethresh = 3;
 	
 	public int gravy = 3;

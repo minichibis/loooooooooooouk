@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2327637503188089783}
   - component: {fileID: 2327637503188089782}
   - component: {fileID: 114422470284540282}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: flag_0
   m_TagString: Finish
   m_Icon: {fileID: 0}
