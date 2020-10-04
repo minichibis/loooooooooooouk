@@ -24,6 +24,8 @@ public class FlagScript : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            Debug.Log(nextLevel);
+
             changeLevel.ChangeLevel(nextLevel);
         }
     }
