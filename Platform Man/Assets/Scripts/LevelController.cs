@@ -1,5 +1,5 @@
 ﻿/*
- * Team Platform Men
+ * Team Platform Men (Gregory Blevins)
  * Project 2
  * Controls which level is loaded
  */
@@ -11,12 +11,22 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     //This array of scenes of all the levels
-    string[] levels = {"MainMenu", "SampleScene"};
+    public string[] levels = {"MainMenu", "SampleScene", "Tutorial1", "Tutorial2" , "Tutorial3" , "Tutorial4"};
+
+    int failureCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    //Restarts the current level
+    public void RestartLevel()
+    {
+        failureCount++;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     //ChangeLevel takes the interger that points to what level is in the above array
@@ -25,6 +35,7 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene(levels[level]);
     }
 
+    //Exits out of the game
     public void Quit()
     {
         Application.Quit();
