@@ -1077,6 +1077,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelController
       objectReference: {fileID: 0}
+    - target: {fileID: 670197835262568758, guid: acdd5a51a84adfe47a3c3cf760e9ea33,
+        type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 670197835262568758, guid: acdd5a51a84adfe47a3c3cf760e9ea33,
+        type: 3}
+      propertyPath: gameOver
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 670197835262568759, guid: acdd5a51a84adfe47a3c3cf760e9ea33,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1130,6 +1140,11 @@ PrefabInstance:
     - target: {fileID: 670197835262568759, guid: acdd5a51a84adfe47a3c3cf760e9ea33,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863068703962724191, guid: acdd5a51a84adfe47a3c3cf760e9ea33,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

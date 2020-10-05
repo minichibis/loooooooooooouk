@@ -11,9 +11,11 @@ using UnityEngine;
 public class MouseDetector : MonoBehaviour
 {
 	PlayerController player;
+    GameOverController gameOverHandle;
 	private void Start()
 	{
 		player = GetComponentInParent<PlayerController>();
+        gameOverHandle = FindObjectOfType<GameOverController>();
 	}
 
 	//Mouse over is one condition for transforming a block
@@ -31,6 +33,7 @@ public class MouseDetector : MonoBehaviour
 	IEnumerator MakeUnplayable()
 	{
 		yield return new WaitForEndOfFrame();
-		player.isPlayable = false; 
+		player.isPlayable = false;
+        gameOverHandle.ReducePlayer();
 	}
 }

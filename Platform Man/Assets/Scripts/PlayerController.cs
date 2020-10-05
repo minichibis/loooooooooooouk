@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 	public static PlayerController mousedOverBlock;
 	public Vector2 velocity;
 	public bool isPlayable = true;
+    GameOverController gameOverHandle;
 	
 	public int coyoteframes = 99;
 	public int coyotethresh = 3;
@@ -31,7 +32,8 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		if(!isBlock) { isPlayable = true; }
-		//transform.gameObject.layer = layerr;
+        //transform.gameObject.layer = layerr;
+        gameOverHandle = FindObjectOfType<GameOverController>();
 	}
 
 	//Compensates for the height of the collider 
@@ -75,8 +77,12 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetMouseButtonUp(0)) { lineOfSiteArrow.SetActive(false); }
-		
-		if(rigidbody.transform.position.y < -10) Destroy(gameObject);
+
+        if (rigidbody.transform.position.y < -10)
+        {
+            gameOverHandle.ReducePlayer();
+            Destroy(gameObject);
+        }
 	}
 
 	private void FixedUpdate()
@@ -122,6 +128,7 @@ public class PlayerController : MonoBehaviour
 				if (otherBlock.mouseDetector.isMousedOver && !otherBlock.isPlayable)
 				{
 					otherBlock.isPlayable = !otherBlock.isPlayable;
+                    gameOverHandle.IncreasePlayer();
 				}
 			}
 		}

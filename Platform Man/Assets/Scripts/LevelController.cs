@@ -11,11 +11,18 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     //This array of scenes of all the levels
-    public string[] levels = {"MainMenu", "SampleScene", "Tutorial1", "Tutorial2" , "Tutorial3" , "Tutorial4"};
+    public string[] levels = {"MainMenu", "SampleScene", "Tutorial1", "Tutorial2" , "Tutorial3" , "Tutorial4", "Level1", "Level2", "Brandt Level 1"};
 
     public Canvas pauseMenu;
 
     int failureCount = 0;
+
+    public GameOverController gameOver;
+
+    void Start()
+    {
+        gameOver = FindObjectOfType<GameOverController>();
+    }
 
     private void FixedUpdate()
     {
@@ -30,6 +37,11 @@ public class LevelController : MonoBehaviour
             {
                 ResumeLevel();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && gameOver.GameOver)
+        {
+            RestartLevel();
         }
     }
 
