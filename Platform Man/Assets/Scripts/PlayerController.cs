@@ -139,15 +139,21 @@ public class PlayerController : MonoBehaviour
 	//Checks if there is a collider under the player
 	bool IsGrounded()
 	{
-		RaycastHit2D[] hitsys = new RaycastHit2D[999];
-		int hitnum = rigidbody.Cast(Vector2.down, hitsys, distToGround);
-		if (hitnum > 0){
-			//Debug.Log(hit.collider.tag);
-			//if (!hit.collider.CompareTag("Player")) { return hit; }
-			//else { return false; }
-			return true;
-		}
-		return false;
+		//RaycastHit2D[] hitsys = new RaycastHit2D[999];
+		//int hitnum = rigidbody.Cast(Vector2.down, hitsys, distToGround);
+		//if (hitnum > 0){
+		//	//Debug.Log(hit.collider.tag);
+		//	//if (!hit.collider.CompareTag("Player")) { return hit; }
+		//	//else { return false; }
+		//	return true;
+		//}
+		//return false;
+
+        if (Mathf.Abs(rigidbody.velocity.y) > .01f)
+        {
+            return false;
+        }
+        return true;
 	}
 
 }

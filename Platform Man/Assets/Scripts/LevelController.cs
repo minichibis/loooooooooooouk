@@ -65,8 +65,8 @@ public class LevelController : MonoBehaviour
     }
 
     //Exits out of the game
-    public void Quit()
-    {
-        Application.Quit();
-    }
+    //public void Quit()
+    //{
+    //    Application.Quit();
+    //}
 }
