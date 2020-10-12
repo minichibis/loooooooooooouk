@@ -26,7 +26,7 @@ public class MouseDetector : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		if (player.isPlayable && player.isBlock) { StartCoroutine(MakeUnplayable()); }
+		if (player.isPlayable && player.isBlock && gameOverHandle.activePlayers > 1) { StartCoroutine(MakeUnplayable()); }
 	}
 
 	//Ensures that a block is not made playable immediantly after becoming unplayable

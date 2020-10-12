@@ -12,11 +12,9 @@ public class GameOverController : MonoBehaviour
 {
     PlayerController[] possiblePlayers;
 
-    public Image gameOverImage;
+    public Canvas gameOverCanvas;
 
-    int activePlayers;
-
-    public bool GameOver = false;
+    public int activePlayers;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +50,6 @@ public class GameOverController : MonoBehaviour
 
     void GameLoss()
     {
-        GameOver = true;
-        gameOverImage.gameObject.SetActive(true);
+        gameOverCanvas.gameObject.SetActive(true);
     }
 }

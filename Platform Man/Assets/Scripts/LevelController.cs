@@ -15,8 +15,6 @@ public class LevelController : MonoBehaviour
 
     public Canvas pauseMenu;
 
-    int failureCount = 0;
-
     public GameOverController gameOver;
 
     void Start()
@@ -38,11 +36,6 @@ public class LevelController : MonoBehaviour
                 ResumeLevel();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.R) && gameOver.GameOver)
-        {
-            RestartLevel();
-        }
     }
 
     public void ResumeLevel()
@@ -53,8 +46,6 @@ public class LevelController : MonoBehaviour
     //Restarts the current level
     public void RestartLevel()
     {
-        failureCount++;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     

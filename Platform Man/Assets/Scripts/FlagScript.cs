@@ -13,7 +13,7 @@ public class FlagScript : MonoBehaviour
     LevelController changeLevel;
     public int nextLevel;
 
-    public Image gameWinImage;
+    public Canvas gameWinImage;
 
     bool validLevelChange = false;
 
@@ -26,18 +26,6 @@ public class FlagScript : MonoBehaviour
         gameOverPrevention = FindObjectOfType<GameOverController>();
     }
 
-    void Update()
-    {
-        if (validLevelChange == true && Input.GetKeyDown(KeyCode.Return))
-        {
-            changeLevel.ChangeLevel(nextLevel);
-        }
-        else if (validLevelChange == true && Input.GetKeyDown(KeyCode.R))
-        {
-            changeLevel.RestartLevel();
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -47,5 +35,15 @@ public class FlagScript : MonoBehaviour
             gameWinImage.gameObject.SetActive(true);
             gameOverPrevention.IncreasePlayer();
         }
+    }
+
+    public void winChangeLevel()
+    {
+        changeLevel.ChangeLevel(nextLevel);
+    }
+
+    public void loseChangeLevel()
+    {
+        changeLevel.RestartLevel();
     }
 }
