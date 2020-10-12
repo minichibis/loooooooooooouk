@@ -22,11 +22,10 @@ public class PlayerController : MonoBehaviour
 	public bool isPlayable = true;
     GameOverController gameOverHandle;
 	
-	public int coyoteframes = 99;
+	public int coyoteframes = 120;
 	public int coyotethresh = 3;
 	
 	public int gravy = 3;
-	
 	//public int layerr = 8;
 
 	private void Start()
@@ -149,7 +148,7 @@ public class PlayerController : MonoBehaviour
 		//}
 		//return false;
 
-        if (Mathf.Abs(rigidbody.velocity.y) > .01f)
+        if (Mathf.Abs(rigidbody.velocity.y) > .03f)
         {
             return false;
         }
