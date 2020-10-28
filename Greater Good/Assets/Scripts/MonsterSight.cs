@@ -11,14 +11,28 @@ public class MonsterSight : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private void OnTriggerStay(Collider other)
+    RaycastHit hit;
+
+    ChasePlayer monsterSight;
+
+    Vector3 playerPosition;
+
+    void Start()
     {
+        monsterSight = FindObjectOfType<ChasePlayer>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
 
         if (other.CompareTag("Player"))
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), Vector3.Distance(transform.position, other.transform.position)))
+            
+            if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), out hit ,Vector3.Distance(transform.position, other.transform.position)) && hit.transform.tag != "Obstacle")
             {
-                
+                monsterSight.doISee(playerPosition);
             }
         }
     }

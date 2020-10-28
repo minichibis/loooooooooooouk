@@ -17,10 +17,18 @@ public class ChasePlayer : MonoBehaviour
     public float boredTimer = 100f;
     float timerHolder;
 
+    FollowPlayerMainMonster monsterTarget;
+
     // Start is called before the first frame update
     void Start()
     {
         timerHolder = boredTimer;
+
+        lastKnownPosition = transform.position;
+
+        startArea = transform.position;
+
+        monsterTarget = FindObjectOfType<FollowPlayerMainMonster>();
     }
 
     // Update is called once per frame
@@ -38,9 +46,9 @@ public class ChasePlayer : MonoBehaviour
     void sensoryPriority()
     {
 
-        if (doISee())
+        if (doISee(lastKnownPosition))
         {
-
+            Debug.Log("hit");
         }
         else if (doIHear())
         {
@@ -59,11 +67,15 @@ public class ChasePlayer : MonoBehaviour
     }
 
     //Handles the "sight range" of the monster
-    private bool doISee()
+    public bool doISee(Vector3 target)
     {
-
-        if(false) //Insert sight code here
+        if (target!=lastKnownPosition)
         {
+
+            lastKnownPosition = target;
+
+            monsterTarget.UpdateTarget(lastKnownPosition);
+
             return true;
         }
 
