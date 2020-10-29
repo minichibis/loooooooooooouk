@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct ExampleStruct
+{
+    public int structInt;
+    public string structString;
+}
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10;
@@ -10,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxStamina = 5;
     [SerializeField] float staminaRegen = 0.5f;
     [SerializeField] float staminaRegenDelay = 1;
+    [SerializeField] ExampleStruct exampleStruct;
     public float stamina;
     bool sprintCooledDown = true;
 
