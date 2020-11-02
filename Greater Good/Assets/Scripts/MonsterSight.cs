@@ -17,6 +17,8 @@ public class MonsterSight : MonoBehaviour
 
     Vector3 playerPosition;
 
+
+
     void Start()
     {
         monsterSight = FindObjectOfType<ChasePlayer>();
@@ -27,7 +29,7 @@ public class MonsterSight : MonoBehaviour
 
         playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !other.CompareTag("Obstacles"))
         {
             
             if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), out hit ,Vector3.Distance(transform.position, other.transform.position)) && hit.transform.tag != "Obstacle")
