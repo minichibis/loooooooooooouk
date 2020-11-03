@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         temp.z = temp.y;
         temp = Camera.main.ScreenToWorldPoint(temp);
         temp.y = transform.position.y;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(temp), rotateSpeed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(temp - transform.position), rotateSpeed);
     }
 
     IEnumerator StaminaRegenDelay()
