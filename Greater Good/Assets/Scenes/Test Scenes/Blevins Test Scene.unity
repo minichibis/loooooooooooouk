@@ -4460,6 +4460,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 31808706873155628, guid: 340a8606c7a52cb48b5a76a9a19fe61d,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 31808706873155628, guid: 340a8606c7a52cb48b5a76a9a19fe61d,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 31808706873155631, guid: 340a8606c7a52cb48b5a76a9a19fe61d,
         type: 3}
       propertyPath: m_Name
