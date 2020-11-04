@@ -53,14 +53,22 @@ public class CutSceneManager : MonoBehaviour
 	private void Start()
 	{
         PlayCutScene("Opening");
+        StartCoroutine(StartGameAfterOpening());
 	}
 
 	public void PlayCutScene(string cutSceneName)
 	{
+        bool sceneFound = false;
         foreach(CutScene cutScene in cutScenes)
 		{
-            if(cutScene.CutSceneName == cutSceneName) { StartCoroutine(PlaySlideShow(cutScene));break; }
+            if(cutScene.CutSceneName == cutSceneName) 
+            {
+                StartCoroutine(PlaySlideShow(cutScene));
+                sceneFound = true;
+                break; 
+            }
 		}
+		if (!sceneFound) { Debug.LogError("[CutSceneManager]" +  cutSceneName + " not found in cutScenes"); }
 	}
 
     IEnumerator PlaySlideShow(CutScene cutScene)
@@ -88,6 +96,12 @@ public class CutSceneManager : MonoBehaviour
             }
         }
         currentSlide.gameObject.SetActive(false);
-        cutScenePlaying = true;
+        cutScenePlaying = false;
     }
+
+    IEnumerator StartGameAfterOpening()
+	{
+        yield return new WaitWhile(() => cutScenePlaying);
+        GameManager.instance.gameStarted = true;
+	}
 }
