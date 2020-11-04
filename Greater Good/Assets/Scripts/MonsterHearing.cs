@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class MonsterHearing : MonoBehaviour
 {
-    // Start is called before the first frame update
+    RaycastHit hit;
+
+    ChasePlayer monsterHear;
+
+    Vector3 playerPosition;
+
+
+
     void Start()
     {
-        
+        monsterHear = FindObjectOfType<ChasePlayer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+
+        playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
+
+        if (other.CompareTag("Player") && !other.CompareTag("Obstacles"))
+        {
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), out hit, Vector3.Distance(transform.position, other.transform.position)) && hit.transform.tag != "Obstacle")
+            {
+                monsterHear.doIHear(playerPosition);
+            }
+        }
     }
 }

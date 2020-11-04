@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class MonsterSight : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     RaycastHit hit;
 
     ChasePlayer monsterSight;
@@ -37,11 +35,5 @@ public class MonsterSight : MonoBehaviour
                 monsterSight.doISee(playerPosition);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

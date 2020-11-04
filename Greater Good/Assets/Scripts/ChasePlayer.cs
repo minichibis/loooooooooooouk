@@ -48,11 +48,11 @@ public class ChasePlayer : MonoBehaviour
 
         if (doISee(lastKnownPosition))
         {
-            Debug.Log("hit");
+            Debug.Log("Sight Hit");
         }
-        else if (doIHear())
+        else if (doIHear(lastKnownPosition))
         {
-
+            Debug.Log("Hearing Hit");
         }
         else if (gotBored())
         {
@@ -83,11 +83,16 @@ public class ChasePlayer : MonoBehaviour
     }
 
     //Handles the "hearing range" of the monster
-    private bool doIHear()
+    public bool doIHear(Vector3 target)
     {
 
-        if(false) //Insert hearing code here
+        if (target != lastKnownPosition)
         {
+
+            lastKnownPosition = target;
+
+            monsterTarget.UpdateTarget(lastKnownPosition);
+
             return true;
         }
 

@@ -17,6 +17,8 @@ public class FollowPlayerMainMonster: MonoBehaviour
     void Update()
     {
         transform.Translate((targetPosition - transform.position).normalized * moveSpeed * Time.deltaTime);
+        
+        //transform.LookAt(targetPosition);
     }
 
     public void UpdateTarget(Vector3 updatedPosition)
