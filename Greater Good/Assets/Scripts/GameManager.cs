@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (gameStarted) { gameStarted = false;  StartCoroutine(ReducePopulation()); }
+		if (gameStarted) { gameStarted = false;  StartCoroutine(ReducePopulation()); FindObjectOfType<TweetManager>().StartSpawnTweets(); }
 		populationText.text = "People that need to evacuate: " + currentPopulation;
 	}
 
