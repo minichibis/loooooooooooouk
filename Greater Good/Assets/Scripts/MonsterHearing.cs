@@ -27,7 +27,7 @@ public class MonsterHearing : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), out hit, Vector3.Distance(transform.position, other.transform.position)) && hit.transform.tag != "Obstacle")
             {
-                monsterHear.doIHear(playerPosition);
+                monsterHear.DoIHear(playerPosition);
             }
         }
     }

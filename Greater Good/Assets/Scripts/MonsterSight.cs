@@ -12,6 +12,7 @@ public class MonsterSight : MonoBehaviour
     RaycastHit hit;
 
     ChasePlayer monsterSight;
+    FollowPlayerMainMonster monsterPosition;
 
     Vector3 playerPosition;
 
@@ -20,19 +21,22 @@ public class MonsterSight : MonoBehaviour
     void Start()
     {
         monsterSight = FindObjectOfType<ChasePlayer>();
+        monsterPosition = FindObjectOfType<FollowPlayerMainMonster>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        
 
         playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
 
         if (other.CompareTag("Player") && !other.CompareTag("Obstacles"))
         {
             
-            if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), out hit ,Vector3.Distance(transform.position, other.transform.position)) && hit.transform.tag != "Obstacle")
+            if (Physics.Raycast(monsterPosition.gameObject.transform.position,playerPosition,out hit))
             {
-                monsterSight.doISee(playerPosition);
+                Debug.Log("Sight Hit");
+                monsterSight.DoISee(playerPosition);
             }
         }
     }

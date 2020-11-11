@@ -34,7 +34,7 @@ public class ChasePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sensoryPriority();
+        SensoryPriority();
 
         if (gettingBored == true)
         {
@@ -43,18 +43,18 @@ public class ChasePlayer : MonoBehaviour
     }
 
     //Determines if the monster can find the player
-    void sensoryPriority()
+    void SensoryPriority()
     {
 
-        if (doISee(lastKnownPosition))
+        if (DoISee(lastKnownPosition))
         {
-            Debug.Log("Sight Hit");
+            
         }
-        else if (doIHear(lastKnownPosition))
+        else if (DoIHear(lastKnownPosition))
         {
             Debug.Log("Hearing Hit");
         }
-        else if (gotBored())
+        else if (GotBored())
         {
             lastKnownPosition = startArea;
             boredTimer = timerHolder;
@@ -67,7 +67,7 @@ public class ChasePlayer : MonoBehaviour
     }
 
     //Handles the "sight range" of the monster
-    public bool doISee(Vector3 target)
+    public bool DoISee(Vector3 target)
     {
         if (target!=lastKnownPosition)
         {
@@ -83,7 +83,7 @@ public class ChasePlayer : MonoBehaviour
     }
 
     //Handles the "hearing range" of the monster
-    public bool doIHear(Vector3 target)
+    public bool DoIHear(Vector3 target)
     {
 
         if (target != lastKnownPosition)
@@ -100,7 +100,7 @@ public class ChasePlayer : MonoBehaviour
     }
 
     //Handles the "bored" timer of the monster and sends it back to the start if it can't find the player
-    private bool gotBored()
+    private bool GotBored()
     {
         if (boredTimer<=0)
         {
