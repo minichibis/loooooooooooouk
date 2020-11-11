@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPlayerMainMonster: MonoBehaviour
+public class FollowPlayerMainMonster : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
 
     Vector3 targetPosition;
-   
+
 
     public GameObject currentTarget;
     GameObject tempTarget;
     List<GameObject> silhouetteInstances;
-    public float timeBetweenSilhouettes=7f,timeHolder=7f;
+    public float timeBetweenSilhouettes = 5f, timeHolder = 5f;
 
     // Update is called once per frame
     void Update()
@@ -38,14 +38,6 @@ public class FollowPlayerMainMonster: MonoBehaviour
 
     public void RevealTarget()
     {
-        tempTarget = Instantiate(currentTarget, targetPosition, currentTarget.transform.rotation);
-        silhouetteInstances.Add(tempTarget);
-        StartCoroutine(FadeOverTime());
-    }
-
-    IEnumerator FadeOverTime()
-    {
-        yield return new WaitForSeconds(7f);
-        Destroy(silhouetteInstances[0]);
+        Instantiate(currentTarget, targetPosition, currentTarget.transform.rotation);
     }
 }
