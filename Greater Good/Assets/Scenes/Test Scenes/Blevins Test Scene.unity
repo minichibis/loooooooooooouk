@@ -1763,9 +1763,6 @@ MonoBehaviour:
   maxStamina: 5
   staminaRegen: 0.5
   staminaRegenDelay: 1
-  exampleStruct:
-    structInt: 0
-    structString: 
   stamina: 0
 --- !u!54 &537720013
 Rigidbody:
@@ -2597,7 +2594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1179152727
 Transform:
   m_ObjectHideFlags: 0
