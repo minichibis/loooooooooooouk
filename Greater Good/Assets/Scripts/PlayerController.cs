@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float staminaRegen = 0.5f;
     [SerializeField] float staminaRegenDelay = 1;
     public float stamina;
-    bool sprintCooledDown = true;
+    public bool sprintCooledDown = true;
 
     // Start is called before the first frame update
     void Start()
