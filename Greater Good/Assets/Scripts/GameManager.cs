@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] TMP_Text populationText;
 
 	public GameObject pauseMenu;
+	public GameObject GameOverPanel;
 
 	int currentPopulation;
 	string curentLevelName = string.Empty;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (gameStarted) { gameStarted = false;  StartCoroutine(ReducePopulation()); FindObjectOfType<TweetManager>().StartSpawnTweets(); }
 		populationText.text = "People that need to evacuate: " + currentPopulation;
+		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); }
 	}
 
 	public void LoadLevel(string levelName)
@@ -82,5 +84,12 @@ public class GameManager : MonoBehaviour
 
 		UnloadCurrentLevel();
 		LoadLevel("Main Menu");
+	}
+
+	public void GameOver()
+	{
+		UnloadCurrentLevel();
+		LoadLevel("Main Menu");
+		GameOverPanel.SetActive(true);
 	}
 }

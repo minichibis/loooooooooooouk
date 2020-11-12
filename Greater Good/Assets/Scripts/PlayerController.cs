@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxStamina = 5;
     [SerializeField] float staminaRegen = 0.5f;
     [SerializeField] float staminaRegenDelay = 1;
+    [SerializeField] int hitPoints = 3;
     public float stamina;
     public bool sprintCooledDown = true;
 
@@ -18,6 +19,13 @@ public class PlayerController : MonoBehaviour
     {
         stamina = maxStamina;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Monster Fist")){ hitPoints--; }
+        if (hitPoints == 0) { GameManager.instance.GameOver(); }
+    }
+
 
     // Update is called once per frame
     void FixedUpdate()
