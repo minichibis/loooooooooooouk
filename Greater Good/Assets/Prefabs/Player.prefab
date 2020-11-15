@@ -160,8 +160,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 12.84
+  m_Intensity: 200
+  m_Range: 20
   m_SpotAngle: 57
   m_InnerSpotAngle: 6
   m_CookieSize: 10
@@ -262,7 +262,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6359053138711092410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -314,6 +314,7 @@ MonoBehaviour:
   maxStamina: 5
   staminaRegen: 0.5
   staminaRegenDelay: 1
+  hitPoints: 3
   stamina: 0
   sprintCooledDown: 1
 --- !u!54 &6359053138711092400
@@ -388,8 +389,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.9871803, b: 0.7028302, a: 1}
-  m_Intensity: 50
-  m_Range: 20
+  m_Intensity: 200
+  m_Range: 50
   m_SpotAngle: 101
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
