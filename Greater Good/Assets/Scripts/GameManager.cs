@@ -86,8 +86,12 @@ public class GameManager : MonoBehaviour
 		LoadLevel("Main Menu");
 	}
 
-	public void GameOver()
+	public void GameOver() { StartCoroutine(LoseGame()); }
+
+	IEnumerator LoseGame()
 	{
+		CutSceneManager.instance.PlayCutScene("Loss");
+		yield return new WaitWhile(() => CutSceneManager.cutScenePlaying);
 		UnloadCurrentLevel();
 		LoadLevel("Main Menu");
 		GameOverPanel.SetActive(true);
