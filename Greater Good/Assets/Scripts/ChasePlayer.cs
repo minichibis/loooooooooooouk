@@ -11,11 +11,11 @@ using UnityEngine;
 public class ChasePlayer : MonoBehaviour
 {
     Vector3 lastKnownPosition;
-    Vector3 startArea;
+    public Vector3 startArea;
 
     private bool gettingBored = false;
-    public float boredTimer = 100f;
-    float timerHolder;
+    public float boredTimer = 100f, boredomDelay = 3f;
+    float timerHolder, boredomDelayHolder;
 
     FollowPlayerMainMonster monsterTarget;
 
@@ -23,6 +23,7 @@ public class ChasePlayer : MonoBehaviour
     void Start()
     {
         timerHolder = boredTimer;
+        boredomDelayHolder = boredomDelay;
 
         lastKnownPosition = transform.position;
 
@@ -40,6 +41,7 @@ public class ChasePlayer : MonoBehaviour
         {
             boredTimer -= 1 * Time.deltaTime;
         }
+        boredomDelay -= 1 * Time.deltaTime;
     }
 
     //Determines if the monster can find the player
@@ -52,16 +54,15 @@ public class ChasePlayer : MonoBehaviour
         }
         else if (DoIHear(lastKnownPosition))
         {
-            Debug.Log("Hearing Hit");
+            
         }
-        else if (GotBored())
+        else if (boredTimer<=(timerHolder/2))
         {
-            lastKnownPosition = startArea;
-            boredTimer = timerHolder;
+            GotBored();
         }
-        else
+        else if (boredomDelay <= 0)
         {
-            gettingBored = false;
+            gettingBored = true;
         }
 
     }
@@ -75,6 +76,10 @@ public class ChasePlayer : MonoBehaviour
             lastKnownPosition = target;
 
             monsterTarget.UpdateTarget(lastKnownPosition);
+
+            gettingBored = false;
+
+            boredomDelay = boredomDelayHolder;
 
             return true;
         }
@@ -93,6 +98,10 @@ public class ChasePlayer : MonoBehaviour
 
             monsterTarget.UpdateTarget(lastKnownPosition);
 
+            gettingBored = false;
+
+            boredomDelay = boredomDelayHolder;
+
             return true;
         }
 
@@ -106,6 +115,8 @@ public class ChasePlayer : MonoBehaviour
         {
             return true;
         }
+
+        monsterTarget.UpdateTargetbyNode();
 
         return false;
     }

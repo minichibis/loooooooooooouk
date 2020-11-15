@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * Gregory Blevins
+ * Project 5
+ * Controls targetting and monster movement
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +11,7 @@ public class FollowPlayerMainMonster : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
 
-    Vector3 targetPosition;
+    Vector3 targetPosition, nextNodePosition;
 
 
     public GameObject currentTarget;
@@ -34,6 +39,11 @@ public class FollowPlayerMainMonster : MonoBehaviour
 
             timeHolder = timeBetweenSilhouettes;
         }
+    }
+
+    public void UpdateTargetbyNode()
+    {
+        targetPosition = nextNodePosition;
     }
 
     public void RevealTarget()
