@@ -35,13 +35,16 @@ public class ChasePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SensoryPriority();
-
-        if (gettingBored == true)
+        if (GameManager.instance.gameStarted)
         {
-            boredTimer -= 1 * Time.deltaTime;
+            SensoryPriority();
+
+            if (gettingBored == true)
+            {
+                boredTimer -= 1 * Time.deltaTime;
+            }
+            boredomDelay -= 1 * Time.deltaTime;
         }
-        boredomDelay -= 1 * Time.deltaTime;
     }
 
     //Determines if the monster can find the player
