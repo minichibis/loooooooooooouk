@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * Gregory Blevins
+ * Project 5
+ * Removes extra silhouettes
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

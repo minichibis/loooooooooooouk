@@ -196,7 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f550f7a77c3eb66478a502cf87daac8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boredTimer: 100
+  startArea: {x: 0, y: 0, z: 0}
+  gettingBored: 0
+  boredTimer: 20
+  boredomDelay: 3
 --- !u!114 &31808706873155630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf4b25b1bdad149a0ffb407396a8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
+  currentNode: {fileID: 0}
   currentTarget: {fileID: 486935652069931720, guid: 028b6cd678bca7047b8a426eae00b81a,
     type: 3}
   timeBetweenSilhouettes: 7
@@ -342,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31808707856399405}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1.57}
+  m_LocalPosition: {x: 0, y: -0, z: 3.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31808706873155625}
@@ -366,8 +370,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.719465
-  m_Height: 7.9631896
+  m_Radius: 2.8382049
+  m_Height: 13.44091
   m_Direction: 1
   m_Center: {x: 0.24830449, y: 2.9815958, z: 0.28885686}
 --- !u!114 &31808707856399403

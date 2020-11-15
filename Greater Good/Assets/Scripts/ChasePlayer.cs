@@ -1,6 +1,6 @@
 ﻿/*
  * Gregory Blevins
- * Project 4
+ * Project 5
  * Controls Monster Memory and Pathing
  */
 
@@ -13,7 +13,7 @@ public class ChasePlayer : MonoBehaviour
     Vector3 lastKnownPosition;
     public Vector3 startArea;
 
-    private bool gettingBored = false;
+    public bool gettingBored = false;
     public float boredTimer = 100f, boredomDelay = 3f;
     float timerHolder, boredomDelayHolder;
 
@@ -79,6 +79,8 @@ public class ChasePlayer : MonoBehaviour
 
             gettingBored = false;
 
+            boredTimer = timerHolder;
+
             boredomDelay = boredomDelayHolder;
 
             return true;
@@ -100,6 +102,8 @@ public class ChasePlayer : MonoBehaviour
 
             gettingBored = false;
 
+            boredTimer = timerHolder;
+
             boredomDelay = boredomDelayHolder;
 
             return true;
@@ -113,10 +117,12 @@ public class ChasePlayer : MonoBehaviour
     {
         if (boredTimer<=0)
         {
+            monsterTarget.UpdateTargetbyNode(true);
+            lastKnownPosition = startArea;
             return true;
         }
 
-        monsterTarget.UpdateTargetbyNode();
+        monsterTarget.UpdateTargetbyNode(false);
 
         return false;
     }
