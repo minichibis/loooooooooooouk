@@ -19,8 +19,6 @@ public class ChasePlayer : MonoBehaviour
 
     bool gameStarted = false;
 
-    bool coRoutineFix = false;
-
     FollowPlayerMainMonster monsterTarget;
 
     // Start is called before the first frame update
@@ -53,11 +51,6 @@ public class ChasePlayer : MonoBehaviour
                 boredTimer -= 1 * Time.deltaTime;
             }
             boredomDelay -= 1 * Time.deltaTime;
-
-            if (!coRoutineFix)
-            {
-                GameManager.instance.StartCoroutine(GameManager.instance.ReducePopulation());
-            }
         }
     }
 
