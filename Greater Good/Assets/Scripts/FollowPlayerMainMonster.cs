@@ -78,7 +78,7 @@ public class FollowPlayerMainMonster : MonoBehaviour
     {
         if (other.CompareTag("MovementNode") && !isBored.gettingBored)
         {
-            for (int i = 0; i<=activeNode.Length; i++)
+            for (int i = 0; i<=activeNode.Length-1; i++)
             {
                 if (activeNode[i].GetActive())
                 {

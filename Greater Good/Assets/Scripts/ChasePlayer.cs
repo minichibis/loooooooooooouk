@@ -136,4 +136,9 @@ public class ChasePlayer : MonoBehaviour
 
         return false;
     }
+
+    public void ActivateChase()
+    {
+        gameStarted = true;
+    }
 }

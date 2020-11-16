@@ -101343,12 +101343,10 @@ MonoBehaviour:
 
     L Shift: Sprint
 
-    E: Interact
-
     P: Pause
 
-    Goald:
-    Avoid the monster for as long as possible
+    Goal: Avoid the
+    monster for as long as possible
 
     Press P to leave the tutorial'
   m_isRightToLeft: 0
@@ -101377,7 +101375,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.35
+  m_fontSize: 24.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -43,4 +43,17 @@ public class MonsterSight : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && !other.CompareTag("Obstacles"))
+        {
+            playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
+
+            if (Physics.Raycast(monsterPosition.gameObject.transform.position, playerPosition, out hit))
+            {
+                monsterSight.DoISee(playerPosition);
+            }
+        }
+    }
 }

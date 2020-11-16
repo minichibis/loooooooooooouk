@@ -56,7 +56,6 @@ public class MonsterPathing : MonoBehaviour
                 NorthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(NorthNode.transform.position);
-                Debug.Log("Travel North");
             }
             //If the distance West is greater than the distance North
             else
@@ -64,7 +63,6 @@ public class MonsterPathing : MonoBehaviour
                 WestNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(WestNode.transform.position);
-                Debug.Log("Travel West");
             }
         }
         //If the player is South and West
@@ -76,7 +74,6 @@ public class MonsterPathing : MonoBehaviour
                 SouthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(SouthNode.transform.position);
-                Debug.Log("Travel South");
             }
             //If the distance West is greater than the distance South
             else
@@ -84,7 +81,6 @@ public class MonsterPathing : MonoBehaviour
                 WestNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(WestNode.transform.position);
-                Debug.Log("Travel West");
             }
         }
         //If the player is North and East
@@ -96,7 +92,6 @@ public class MonsterPathing : MonoBehaviour
                 NorthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(NorthNode.transform.position);
-                Debug.Log("Travel North");
             }
             //If the distance East is greater than the distance North
             else
@@ -104,7 +99,6 @@ public class MonsterPathing : MonoBehaviour
                 EastNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(EastNode.transform.position);
-                Debug.Log("Travel East");
             }
         }
         //If the player is South and East
@@ -116,7 +110,6 @@ public class MonsterPathing : MonoBehaviour
                 SouthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(SouthNode.transform.position);
-                Debug.Log("Travel South");
             }
             //If the distance East is greater than the distance South
             else
@@ -124,7 +117,6 @@ public class MonsterPathing : MonoBehaviour
                 EastNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(EastNode.transform.position);
-                Debug.Log("Travel East");
             }
         }
     }
@@ -158,7 +150,6 @@ public class MonsterPathing : MonoBehaviour
                 NorthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(NorthNode.transform.position);
-                Debug.Log("Travel North");
             }
             //If the distance West is greater than the distance North
             else
@@ -166,7 +157,6 @@ public class MonsterPathing : MonoBehaviour
                 WestNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(WestNode.transform.position);
-                Debug.Log("Travel West");
             }
         }
         //If the starting position is South and West
@@ -178,7 +168,6 @@ public class MonsterPathing : MonoBehaviour
                 SouthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(SouthNode.transform.position);
-                Debug.Log("Travel South");
             }
             //If the distance West is greater than the distance South
             else
@@ -186,7 +175,6 @@ public class MonsterPathing : MonoBehaviour
                 WestNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(WestNode.transform.position);
-                Debug.Log("Travel West");
             }
         }
         //If the starting position is North and East
@@ -198,7 +186,6 @@ public class MonsterPathing : MonoBehaviour
                 NorthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(NorthNode.transform.position);
-                Debug.Log("Travel North");
             }
             //If the distance East is greater than the distance North
             else
@@ -206,7 +193,6 @@ public class MonsterPathing : MonoBehaviour
                 EastNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(EastNode.transform.position);
-                Debug.Log("Travel East");
             }
         }
         //If the starting position is South and East
@@ -218,7 +204,6 @@ public class MonsterPathing : MonoBehaviour
                 SouthNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(SouthNode.transform.position);
-                Debug.Log("Travel South");
             }
             //If the distance East is greater than the distance South
             else
@@ -226,7 +211,6 @@ public class MonsterPathing : MonoBehaviour
                 EastNode.SetActiveNode();
                 SetActiveNode();
                 targetingData.UpdateNodePosition(EastNode.transform.position);
-                Debug.Log("Travel East");
             }
         }
 

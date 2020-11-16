@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 	public GameObject pauseMenu;
 	public GameObject GameOverPanel;
 
+    ChasePlayer quickFix;
+
 	int currentPopulation;
 	string curentLevelName = string.Empty;
 	public bool gameStarted = false;
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (gameStarted) { gameStarted = false;  StartCoroutine(ReducePopulation()); FindObjectOfType<TweetManager>().StartSpawnTweets(); }
+		if (gameStarted) { gameStarted = false; quickFix = FindObjectOfType<ChasePlayer>(); quickFix.ActivateChase(); StartCoroutine(ReducePopulation()); FindObjectOfType<TweetManager>().StartSpawnTweets(); }
 		populationText.text = "People that need to evacuate: " + currentPopulation;
 		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); }
 	}
