@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Monster Fist")){ hitPoints--; }
+        if (collision.collider.gameObject.name == "Monster Fist") { hitPoints--; }
         if (hitPoints == 0) { GameManager.instance.GameOver(); }
     }
 
