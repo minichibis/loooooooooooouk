@@ -35,7 +35,6 @@ public class MonsterSight : MonoBehaviour
             
             if (Physics.Raycast(monsterPosition.gameObject.transform.position,playerPosition,out hit))
             {
-                Debug.Log("Sight Hit");
                 monsterSight.DoISee(playerPosition);
             }
         }

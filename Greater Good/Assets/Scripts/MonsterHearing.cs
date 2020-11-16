@@ -10,19 +10,22 @@ public class MonsterHearing : MonoBehaviour
 
     Vector3 playerPosition;
 
-
+    PlayerController playerHolder;
 
     void Start()
     {
         monsterHear = FindObjectOfType<ChasePlayer>();
+        playerHolder = FindObjectOfType<PlayerController>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    
+
+    private void OnTriggerStay(Collider other)
     {
 
-        playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
+        playerPosition = playerHolder.gameObject.transform.position;
 
-        if (other.CompareTag("Player") && !other.CompareTag("Obstacles"))
+        if (other.CompareTag("Player") && playerHolder.IsItSprinting() )
         {
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(other.transform.position), out hit, Vector3.Distance(transform.position, other.transform.position)) && hit.transform.tag != "Obstacle")

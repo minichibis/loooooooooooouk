@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float staminaRegen = 0.5f;
     [SerializeField] float staminaRegenDelay = 1;
     [SerializeField] int hitPoints = 3;
+    [SerializeField] bool isSprinting = false;
     public float stamina;
     public bool sprintCooledDown = true;
 
@@ -36,9 +37,11 @@ public class PlayerController : MonoBehaviour
 		{
             GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(horizontalMovement, 0, verticalMovement).normalized * sprintSpeed * Time.fixedDeltaTime));
             stamina -= Time.fixedDeltaTime;
+            isSprinting = true;
         }
 		else
 		{
+            isSprinting = false;
             if (stamina == 0 && sprintCooledDown) StartCoroutine(StaminaRegenDelay());
             GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(horizontalMovement, 0, verticalMovement).normalized * moveSpeed * Time.fixedDeltaTime));
             if (stamina < maxStamina) { stamina += staminaRegen * Time.fixedDeltaTime; }
@@ -57,4 +60,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(staminaRegenDelay);
         sprintCooledDown = true;
 	}
+
+    public bool IsItSprinting()
+    {
+        return isSprinting;
+    }
 }
