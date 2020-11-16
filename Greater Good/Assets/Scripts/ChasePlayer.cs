@@ -66,7 +66,7 @@ public class ChasePlayer : MonoBehaviour
         {
             
         }
-        else if (boredTimer<=(timerHolder/2))
+        else if (boredTimer<=(timerHolder-10))
         {
             GotBored();
         }

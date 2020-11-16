@@ -35,7 +35,9 @@ public class FollowPlayerMainMonster : MonoBehaviour
     {
         transform.LookAt(targetPosition);
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        if ((transform.position - targetPosition).magnitude >= 1) {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
 
         timeHolder -= 1 * Time.deltaTime;
     }
