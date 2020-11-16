@@ -38,7 +38,7 @@ public class MonsterPathing : MonoBehaviour
             zPosition = false;
         }
 
-        if (transform.position.x < targetPlayer.gameObject.transform.position.x)
+        if (transform.position.x > targetPlayer.gameObject.transform.position.x)
         {
             xPosition = true;
         }
@@ -131,7 +131,7 @@ public class MonsterPathing : MonoBehaviour
 
     public void MoveToNodeHome()
     {
-        if (transform.position.z > startingPosition.startArea.z)
+        if (transform.position.z < startingPosition.startArea.z)
         {
             zPosition = true;
         }
