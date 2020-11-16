@@ -16,7 +16,7 @@ public class MonsterSight : MonoBehaviour
 
     Vector3 playerPosition;
 
-
+    MonsterPathing hitNode;
 
     void Start()
     {
@@ -26,7 +26,11 @@ public class MonsterSight : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("MovementNode"))
+        {
+            hitNode = other.GetComponent<MonsterPathing>();
+            monsterPosition.currentNode = hitNode;
+        }
 
         playerPosition = FindObjectOfType<PlayerController>().gameObject.transform.position;
 
