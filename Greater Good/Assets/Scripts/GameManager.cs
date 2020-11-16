@@ -93,9 +93,9 @@ public class GameManager : MonoBehaviour
 		}
 		CutSceneManager.instance.PlayCutScene("Conclusion");
 		yield return new WaitWhile(() => CutSceneManager.cutScenePlaying);
-        UnloadLevel("Main Level");
-        GameOverPanel.SetActive(true);
-    }
+		UnloadCurrentLevel();
+		LoadLevel("Main Menu");
+	}
 
 	public void GameOver() { StartCoroutine(LoseGame()); }
 
@@ -103,7 +103,8 @@ public class GameManager : MonoBehaviour
 	{
 		CutSceneManager.instance.PlayCutScene("Loss");
 		yield return new WaitWhile(() => CutSceneManager.cutScenePlaying);
-        UnloadLevel("Main Level");
+		UnloadCurrentLevel();
+		LoadLevel("Main Menu");
 		GameOverPanel.SetActive(true);
 	}
 }
