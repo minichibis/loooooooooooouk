@@ -9,7 +9,7 @@ public class TweetManager : MonoBehaviour
 	[SerializeField] GameObject tweetDisplay;
 	[SerializeField] int deleteTweetsAfter = 5;
 	[SerializeField] float spawnTime = 5;
-	[SerializeField] string[] tweetMessages;
+	[SerializeField] string[] tweetMessages = new string[10];
     public bool spawnTweets = false;
 
 	public void StartSpawnTweets() { spawnTweets = true; StartCoroutine(SpawnTweets()); }
