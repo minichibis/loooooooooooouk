@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (gameStarted) { gameStarted = false; quickFix = FindObjectOfType<ChasePlayer>(); quickFix.ActivateChase(); StartCoroutine(ReducePopulation()); FindObjectOfType<TweetManager>().StartSpawnTweets(); }
 		populationText.text = "People that need to evacuate: " + currentPopulation;
-		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); }
+		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); if (Time.timeScale == 1) { Pause(); } else { Unpause(); } }
 	}
 
 	public void LoadLevel(string levelName)
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 		pauseMenu.SetActive(true);
 	}
 
-	public void unpause()
+	public void Unpause()
 	{
 		Time.timeScale = 1;
 		pauseMenu.SetActive(false);

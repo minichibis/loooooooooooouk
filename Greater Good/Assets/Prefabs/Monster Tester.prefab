@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf4b25b1bdad149a0ffb407396a8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 7
   currentNode: {fileID: 0}
   currentTarget: {fileID: 486935652069931720, guid: 028b6cd678bca7047b8a426eae00b81a,
     type: 3}
