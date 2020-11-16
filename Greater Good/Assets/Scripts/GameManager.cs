@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int maxPopulationDetlaPerTick;
 	[SerializeField] int tickTime = 5;
 	[SerializeField] TMP_Text populationText;
+	[SerializeField] GameObject tweetDisplay;
 
 	public GameObject pauseMenu;
 	public GameObject GameOverPanel;
@@ -37,10 +38,19 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (gameStarted) { gameStarted = false; quickFix = FindObjectOfType<ChasePlayer>(); quickFix.ActivateChase(); StartCoroutine(ReducePopulation()); FindObjectOfType<TweetManager>().StartSpawnTweets(); }
+		if (gameStarted) 
+		{
+			gameStarted = false; 
+			quickFix = FindObjectOfType<ChasePlayer>(); 
+			quickFix.ActivateChase(); 
+			StartCoroutine(ReducePopulation()); 
+			FindObjectOfType<TweetManager>().StartSpawnTweets(); 
+		}
 		populationText.text = "People that need to evacuate: " + currentPopulation;
 		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); if (Time.timeScale == 1) { Pause(); } else { Unpause(); } }
 	}
+
+	public GameObject GetTweetDisplay() { return tweetDisplay; }
 
 	public void LoadLevel(string levelName)
 	{
@@ -83,7 +93,6 @@ public class GameManager : MonoBehaviour
 		}
 		CutSceneManager.instance.PlayCutScene("Conclusion");
 		yield return new WaitWhile(() => CutSceneManager.cutScenePlaying);
-
 		UnloadCurrentLevel();
 		LoadLevel("Main Menu");
 	}
