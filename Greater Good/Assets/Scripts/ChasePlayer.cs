@@ -17,6 +17,8 @@ public class ChasePlayer : MonoBehaviour
     public float boredTimer = 100f, boredomDelay = 3f;
     float timerHolder, boredomDelayHolder;
 
+    bool gameStarted = false;
+
     FollowPlayerMainMonster monsterTarget;
 
     // Start is called before the first frame update
@@ -27,15 +29,20 @@ public class ChasePlayer : MonoBehaviour
 
         lastKnownPosition = transform.position;
 
-        startArea = transform.position;
-
         monsterTarget = FindObjectOfType<FollowPlayerMainMonster>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.gameStarted)
+        if (!gameStarted && GameManager.instance.gameStarted)
+        {
+            gameStarted = true;
+
+            startArea = monsterTarget.currentNode.transform.position;
+        }
+
+        if (gameStarted)
         {
             SensoryPriority();
 
