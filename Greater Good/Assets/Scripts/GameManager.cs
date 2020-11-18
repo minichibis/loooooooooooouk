@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     ChasePlayer quickFix;
 
-	int currentPopulation;
+	public int currentPopulation;
 	string curentLevelName = string.Empty;
 	public bool gameStarted = false;
 
@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
 		populationText.text = "People that need to evacuate: " + currentPopulation;
 		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); if (Time.timeScale == 1) { Pause(); } else { Unpause(); } }
 	}
+
+	public void ResetPopulation() { currentPopulation = startingPopulation; }
 
 	public GameObject GetTweetDisplay() { return tweetDisplay; }
 

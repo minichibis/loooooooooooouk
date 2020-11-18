@@ -45,8 +45,7 @@ public class CutSceneManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if(instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
-		else { Destroy(gameObject); }
+		instance = this;  
         currentSlide.gameObject.SetActive(false);
 	}
 
@@ -102,6 +101,7 @@ public class CutSceneManager : MonoBehaviour
     IEnumerator StartGameAfterOpening()
 	{
         yield return new WaitWhile(() => cutScenePlaying);
+        GameManager.instance.ResetPopulation();
         GameManager.instance.gameStarted = true;
 	}
 }
