@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float staminaRegen = 0.5f;
     [SerializeField] float staminaRegenDelay = 1;
     [SerializeField] int hitPoints = 3;
+    [SerializeField] int maxHitPoints = 3;
     [SerializeField] bool isSprinting = false;
+    [SerializeField] float invincibilityTime = 1;
+    [SerializeField] Slider staminaBar;
+    [SerializeField] HeartCell[] hearts;
     public float stamina;
     public bool sprintCooledDown = true;
+    bool isInvincible = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,39 +29,67 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.name == "Monster Fist") { hitPoints--; }
-        if (hitPoints == 0) { GameManager.instance.GameOver(); }
+        if (!isInvincible)
+        {
+            if (collision.collider.gameObject.name == "Monster Fist") { hitPoints--; }
+            int i = 0;
+            while (i < hitPoints)
+            {
+                hearts[i].TurnOn();
+                i++;
+            }
+            while (i < maxHitPoints)
+            {
+                hearts[i].TurnOff();
+                i++;
+            }
+            if (hitPoints == 0) { GameManager.instance.GameOver(); }
+            StartCoroutine(BecomeInvincible());
+        }
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float horizontalMovement = Input.GetAxis("Horizontal");
-        float verticalMovement = Input.GetAxis("Vertical");
-        if(stamina > 0 && Input.GetKey(KeyCode.LeftShift) && sprintCooledDown && (horizontalMovement != 0 || verticalMovement != 0))
-		{
-            GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(horizontalMovement, 0, verticalMovement).normalized * sprintSpeed * Time.fixedDeltaTime));
-            stamina -= Time.fixedDeltaTime;
-            isSprinting = true;
-        }
-		else
-		{
-            isSprinting = false;
-            if (stamina == 0 && sprintCooledDown) StartCoroutine(StaminaRegenDelay());
-            GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(horizontalMovement, 0, verticalMovement).normalized * moveSpeed * Time.fixedDeltaTime));
-            if (stamina < maxStamina) { stamina += staminaRegen * Time.fixedDeltaTime; }
-        }
+        if (!CutSceneManager.cutScenePlaying)
+        {
+            staminaBar.value = 1 - (stamina / maxStamina);
+            float horizontalMovement = Input.GetAxis("Horizontal");
+            float verticalMovement = Input.GetAxis("Vertical");
+            if (stamina > 0 && Input.GetKey(KeyCode.LeftShift) && sprintCooledDown && (horizontalMovement != 0 || verticalMovement != 0))
+            {
+                GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(horizontalMovement, 0, verticalMovement).normalized * sprintSpeed * Time.fixedDeltaTime));
+                stamina -= Time.fixedDeltaTime;
+                isSprinting = true;
+            }
+            else
+            {
+                isSprinting = false;
+                GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(horizontalMovement, 0, verticalMovement).normalized * moveSpeed * Time.fixedDeltaTime));
+                if (stamina < maxStamina && sprintCooledDown) { stamina += staminaRegen * Time.fixedDeltaTime; }
+            }
 
-        Vector3 temp = Input.mousePosition;
-        temp.z = temp.y;
-        temp = Camera.main.ScreenToWorldPoint(temp);
-        temp.y = transform.position.y;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(temp - transform.position), rotateSpeed);
+            if (Input.GetKeyUp(KeyCode.LeftShift ) && sprintCooledDown) { StartCoroutine(StaminaRegenDelay()); }
+
+            Vector3 temp = Input.mousePosition;
+            temp.z = temp.y;
+            temp = Camera.main.ScreenToWorldPoint(temp);
+            temp.y = transform.position.y;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(temp - transform.position), rotateSpeed);
+        }
     }
+
+    IEnumerator BecomeInvincible()
+	{
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibilityTime);
+        isInvincible = false;
+	}
 
     IEnumerator StaminaRegenDelay()
 	{
+        Debug.Log("hiiiiiiiiii");
         sprintCooledDown = false;
         yield return new WaitForSeconds(staminaRegenDelay);
         sprintCooledDown = true;

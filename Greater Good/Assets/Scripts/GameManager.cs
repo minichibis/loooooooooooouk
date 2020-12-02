@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 			FindObjectOfType<TweetManager>().StartSpawnTweets(); 
 		}
 		populationText.text = "People that need to evacuate: " + currentPopulation;
-		if (Input.GetKeyDown(KeyCode.P)) { pauseMenu.SetActive(true); if (Time.timeScale == 1) { Pause(); } else { Unpause(); } }
+		if (Input.GetKeyDown(KeyCode.P ) ) { pauseMenu.SetActive(true); if (Time.timeScale == 1) { Pause(); } else { Unpause(); } }
 	}
 
 	public void ResetPopulation() { currentPopulation = startingPopulation; }
