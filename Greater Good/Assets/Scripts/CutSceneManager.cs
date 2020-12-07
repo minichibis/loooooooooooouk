@@ -86,7 +86,12 @@ public class CutSceneManager : MonoBehaviour
                 colorFade += 0.2f;
                 currentSlide.color = new Color(colorFade, colorFade, colorFade, 1);
             }
-            yield return new WaitForSeconds(slide.SlideTime);
+            float elapsedTime = 0;
+            while(elapsedTime < slide.SlideTime && !Input.GetKeyDown(KeyCode.Space))
+			{
+                yield return new WaitForSeconds(0.01f);
+                elapsedTime += 0.01f;
+            }
             while (colorFade > 0)
             {
                 yield return new WaitForSeconds(0.1f);

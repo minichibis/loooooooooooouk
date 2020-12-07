@@ -50,12 +50,22 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.P ) ) { pauseMenu.SetActive(true); if (Time.timeScale == 1) { Pause(); } else { Unpause(); } }
 	}
 
-	public void ResetPopulation() { currentPopulation = startingPopulation; }
+	public void ResetPopulation() 
+	{
+		currentPopulation = startingPopulation;
+		TweetManager tweetManager = FindObjectOfType<TweetManager>();
+		if(tweetManager)
+		{
+			Debug.Log("Clear Tweets");
+			tweetManager.ClearTweets();
+		}
+	}
 
 	public GameObject GetTweetDisplay() { return tweetDisplay; }
 
 	public void LoadLevel(string levelName)
 	{
+		Unpause();
 		AsyncOperation ao = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
 		if (ao == null) { Debug.LogError("[GameManager] Unable to load level "); }
 		curentLevelName = levelName;
@@ -87,16 +97,19 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator ReducePopulation()
 	{
-		while(currentPopulation > 0)
+		while(currentPopulation > 0 && !CutSceneManager.cutScenePlaying)
 		{
 			currentPopulation -= Random.Range(minPopulationDetlaPerTick, maxPopulationDetlaPerTick+1);
 			if(currentPopulation <= 0) { currentPopulation = 0; }
 			yield return new WaitForSeconds(tickTime);
 		}
-		CutSceneManager.instance.PlayCutScene("Conclusion");
-		yield return new WaitWhile(() => CutSceneManager.cutScenePlaying);
-        UnloadLevel("Main Level");
-        GameOverPanel.SetActive(true);
+		if (!CutSceneManager.cutScenePlaying)
+		{
+			CutSceneManager.instance.PlayCutScene("Conclusion");
+			yield return new WaitWhile(() => CutSceneManager.cutScenePlaying);
+			UnloadLevel("Main Level");
+			GameOverPanel.SetActive(true);
+		}
     }
 
 	public void GameOver() { StartCoroutine(LoseGame()); }

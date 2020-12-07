@@ -13,6 +13,14 @@ public class TweetManager : MonoBehaviour
 
 	public void StartSpawnTweets() { spawnTweets = true; StartCoroutine(SpawnTweets()); }
 
+	public void ClearTweets() 
+	{
+		for(int i = 0; i < GameManager.instance.GetTweetDisplay().transform.childCount; i++)
+		{
+			Destroy(GameManager.instance.GetTweetDisplay().transform.GetChild(i).gameObject);
+		}
+	}
+
 	public IEnumerator SpawnTweets()
 	{
 		while(spawnTweets)

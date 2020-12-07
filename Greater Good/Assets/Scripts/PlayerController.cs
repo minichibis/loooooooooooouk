@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator StaminaRegenDelay()
 	{
-        Debug.Log("hiiiiiiiiii");
         sprintCooledDown = false;
         yield return new WaitForSeconds(staminaRegenDelay);
         sprintCooledDown = true;
