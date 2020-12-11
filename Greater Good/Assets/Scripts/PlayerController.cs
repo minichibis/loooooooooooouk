@@ -21,10 +21,14 @@ public class PlayerController : MonoBehaviour
     public bool sprintCooledDown = true;
     bool isInvincible = false;
 
+    MonsterPathing[] allNodes;
+    public MonsterPathing nearestNode;
+
     // Start is called before the first frame update
     void Start()
     {
         stamina = maxStamina;
+        allNodes = FindObjectsOfType<MonsterPathing>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -97,5 +101,23 @@ public class PlayerController : MonoBehaviour
     public bool IsItSprinting()
     {
         return isSprinting;
+    }
+
+    public void FindNearestNode()
+    {
+        float lenght = 9999.0f;
+
+        MonsterPathing startNode = null;
+
+        for (int i = 0; i < allNodes.Length; i++)
+        {
+            if (Mathf.Abs((this.transform.position - allNodes[i].transform.position).magnitude) < lenght)
+            {
+                lenght = Mathf.Abs((this.transform.position - allNodes[i].transform.position).magnitude);
+                startNode = allNodes[i];
+            }
+        }
+
+         nearestNode = startNode;
     }
 }

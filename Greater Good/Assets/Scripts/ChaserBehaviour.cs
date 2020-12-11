@@ -9,15 +9,15 @@ using UnityEngine;
 
 public class ChaserBehaviour : MonoBehaviour
 {
-    List<MonsterPathing> previousNodes;
+    ChasePlayer output;
 
-    MonsterPathing setTarget, endNode;
+    public List<MonsterPathing> previousNodes;
 
-    private int maxPossibleNodes = 12;
+    public MonsterPathing setTarget, endNode;
 
-    private int currentNode = 0;
+    public int currentNode = 0;
 
-    bool updatedNode = false;
+    bool north, west;
 
     public ChaserBehaviour(MonsterPathing startingNode, MonsterPathing endingNode)
     {
@@ -25,69 +25,77 @@ public class ChaserBehaviour : MonoBehaviour
 
         endNode = endingNode;
 
-        previousNodes.Add(startingNode);
-    }
-
-    ChaserBehaviour(int inputNode, List<MonsterPathing> currentNodeList, int movementDirection)
-    {
-        currentNode = inputNode;
-
-        if (movementDirection == 0 && (setTarget != setTarget.NorthNode))
-        {
-            setTarget = setTarget.NorthNode;
-            updatedNode = true;
-        }
-        else if (movementDirection == 1 && (setTarget != setTarget.EastNode))
-        {
-            setTarget = setTarget.EastNode;
-            updatedNode = true;
-        }
-        else if (movementDirection == 2 && (setTarget != setTarget.WestNode))
-        {
-            setTarget = setTarget.WestNode;
-            updatedNode = true;
-        }
-        else if (movementDirection == 3 && (setTarget != setTarget.SouthNode))
-        {
-            setTarget = setTarget.SouthNode;
-            updatedNode = true;
-        }
-
+        previousNodes = new List<MonsterPathing>() { startingNode };
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        MoveToTarget();
+        output = FindObjectOfType<ChasePlayer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        MoveToTarget();
     }
 
     void MoveToTarget()
     {
-        previousNodes.Add(setTarget);
+        this.transform.position = setTarget.transform.position;
 
-        transform.position = setTarget.transform.position;
+        Debug.Log("How long does this happen: " + transform.position);
 
-        if (currentNode <= maxPossibleNodes && setTarget != endNode)
+        if (endNode.transform.position.z >= transform.position.z && !setTarget.NorthNode.activated)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                ChaserBehaviour temp = new ChaserBehaviour(currentNode + 1, previousNodes, i);
-                Instantiate(temp, transform);
-            }
+            north = true;
         }
+        else
+        {
+            north = false;
+        }
+        if (endNode.transform.position.x <= transform.position.x && !setTarget.WestNode.activated)
+        {
+            west = true;
+        }
+        else
+        {
+            west = false;
+        }
+
+        if (north && setTarget.NorthNode != setTarget && !setTarget.NorthNode.activated)
+        {
+            Debug.Log("Going North");
+            setTarget = setTarget.NorthNode;
+            setTarget.Activate();
+        }
+        else if (west && setTarget.WestNode != setTarget && !setTarget.WestNode.activated)
+        {
+            Debug.Log("Going West");
+            setTarget = setTarget.WestNode;
+            setTarget.Activate();
+        }
+        else if (!north && setTarget.SouthNode != setTarget && !setTarget.SouthNode.activated)
+        {
+            Debug.Log("Going South");
+            setTarget = setTarget.SouthNode;
+            setTarget.Activate();
+        }
+        else if (!west && setTarget.EastNode != setTarget && !setTarget.EastNode.activated)
+        {
+            Debug.Log("Going East");
+            setTarget = setTarget.EastNode;
+            setTarget.Activate();
+        }
+
+        if (setTarget == setTarget.SouthNode)
+
+        previousNodes.Add(setTarget);
 
         if (setTarget == endNode)
         {
-
+            Debug.Log("Time to end this");
+            Destroy(this.GetComponent<GameObject>());
         }
-
-        Destroy(gameObject);
     }
 
     List<Vector3> PathToTravel()
@@ -101,4 +109,20 @@ public class ChaserBehaviour : MonoBehaviour
 
         return navigationalNodes;
     }
+
+    public void InitialValues(MonsterPathing startingNode, MonsterPathing endingNode, int startingValue)
+    {
+        setTarget = startingNode;
+
+        endNode = endingNode;
+
+        currentNode = startingValue;
+
+        previousNodes = new List<MonsterPathing>() { startingNode };
+
+        Debug.Log(previousNodes + " & " + currentNode);
+
+        MoveToTarget();
+    }
+    
 }

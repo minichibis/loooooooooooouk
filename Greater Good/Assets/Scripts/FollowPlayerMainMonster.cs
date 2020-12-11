@@ -13,7 +13,7 @@ public class FollowPlayerMainMonster : MonoBehaviour
 
     Vector3 targetPosition, nextNodePosition;
 
-    MonsterPathing[] activeNode;
+    PlayerController teleportLocation;
 
     public MonsterPathing currentNode;
 
@@ -22,24 +22,35 @@ public class FollowPlayerMainMonster : MonoBehaviour
     public GameObject currentTarget;
     GameObject tempTarget;
     List<GameObject> silhouetteInstances;
-    public float timeBetweenSilhouettes = 5f, timeHolder = 5f;
+    public float timeBetweenSilhouettes = 5f, timeHolder = 5f, teleportCooldown = 5f;
+
+    int teleportIncrement = 1;
 
     void Start()
     {
         isBored = GetComponent<ChasePlayer>();
-        activeNode = FindObjectsOfType<MonsterPathing>();
+        teleportLocation = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.LookAt(targetPosition);
 
         if ((transform.position - targetPosition).magnitude >= 1) {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
+        else
+        {
+            if (isBored.gettingBored && isBored.boredTimer < 15f && teleportCooldown <= 0)
+            {
+                TeleportToPlayer();
+                teleportCooldown = timeBetweenSilhouettes + 5;
+            }
+        }
 
         timeHolder -= 1 * Time.deltaTime;
+        teleportCooldown -= 1 * Time.deltaTime;
     }
 
     public void UpdateTarget(Vector3 updatedPosition)
@@ -54,51 +65,45 @@ public class FollowPlayerMainMonster : MonoBehaviour
         }
     }
 
-    public void UpdateTargetbyNode(bool boredomTest)
-    {
-        if (boredomTest)
-        {
-            currentNode.MoveToNodeHome();
-            targetPosition = nextNodePosition;
-        }
-        else
-        {
-            currentNode.MoveToNodePlayer();
-            targetPosition = nextNodePosition;
-        }
-        
-    }
-
-    public void UpdateNodePosition(Vector3 NodeTarget)
-    {
-        nextNodePosition = NodeTarget;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("MovementNode") && !isBored.gettingBored)
-        {
-            for (int i = 0; i<=activeNode.Length-1; i++)
-            {
-                if (activeNode[i].GetActive())
-                {
-                    if (activeNode[i].transform.position != other.transform.position)
-                    {
-                        activeNode[i].SetActiveNode();
-                    }
-                }
-                if (other.gameObject == activeNode[i])
-                {
-                    activeNode[i].SetActiveNode();
-                    currentNode = activeNode[i];
-                }
-            }
-
-        }
-    }
-
     public void RevealTarget()
     {
         Instantiate(currentTarget, targetPosition, currentTarget.transform.rotation);
+    }
+
+    void TeleportToPlayer()
+    {
+        teleportLocation.FindNearestNode();
+
+
+
+        if (teleportLocation.nearestNode.SouthNode != teleportLocation.nearestNode && teleportIncrement <= 2)
+        {
+            transform.position = teleportLocation.nearestNode.SouthNode.transform.position;
+            UpdateTarget(teleportLocation.nearestNode.transform.position);
+            teleportIncrement++;
+
+
+        }
+        else if(teleportLocation.nearestNode.EastNode != teleportLocation.nearestNode && teleportIncrement <= 4){
+            transform.position = teleportLocation.nearestNode.EastNode.transform.position;
+            UpdateTarget(teleportLocation.nearestNode.transform.position);
+            teleportIncrement++;
+
+        }
+        else if (teleportLocation.nearestNode.NorthNode != teleportLocation.nearestNode && teleportIncrement <= 6)
+        {
+            transform.position = teleportLocation.nearestNode.NorthNode.transform.position;
+            UpdateTarget(teleportLocation.nearestNode.transform.position);
+            teleportIncrement++;
+
+        }
+        else if (teleportLocation.nearestNode.WestNode != teleportLocation.nearestNode && teleportIncrement >= 7)
+        {
+            transform.position = teleportLocation.nearestNode.WestNode.transform.position;
+            UpdateTarget(teleportLocation.nearestNode.transform.position);
+            teleportIncrement = 1;
+
+        }
+        teleportIncrement++;
     }
 }

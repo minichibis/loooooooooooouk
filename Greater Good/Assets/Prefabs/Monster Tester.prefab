@@ -381,6 +381,8 @@ MonoBehaviour:
   gettingBored: 0
   boredTimer: 60
   boredomDelay: 3
+  startingNode: {fileID: 0}
+  temp: {fileID: 9199490571473860415, guid: ac98ab628ba61414ab70058d9013a077, type: 3}
 --- !u!114 &31808706873155630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +401,7 @@ MonoBehaviour:
     type: 3}
   timeBetweenSilhouettes: 12
   timeHolder: 7
+  additionalTimer: 5
 --- !u!95 &1259241239599276188
 Animator:
   serializedVersion: 3

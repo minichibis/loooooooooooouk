@@ -14,12 +14,20 @@ public class ChasePlayer : MonoBehaviour
     public Vector3 startArea;
 
     public bool gettingBored = false;
-    public float boredTimer = 100f, boredomDelay = 3f;
+    public float boredTimer = 30f, boredomDelay = 3f;
     float timerHolder, boredomDelayHolder;
 
     bool gameStarted = false;
 
+    public MonsterPathing startingNode;
+    public List<Vector3> pathToPlayer;
+    MonsterPathing[] allNodes;
+
     FollowPlayerMainMonster monsterTarget;
+
+    PlayerController player;
+
+    //public ChaserBehaviour temp;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +35,13 @@ public class ChasePlayer : MonoBehaviour
         timerHolder = boredTimer;
         boredomDelayHolder = boredomDelay;
 
+        allNodes = FindObjectsOfType<MonsterPathing>();
+
         lastKnownPosition = transform.position;
 
         monsterTarget = FindObjectOfType<FollowPlayerMainMonster>();
+
+        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -44,11 +56,20 @@ public class ChasePlayer : MonoBehaviour
 
         if (gameStarted)
         {
+            
             SensoryPriority();
 
-            if (gettingBored == true)
+            if (gettingBored)
             {
                 boredTimer -= 1 * Time.deltaTime;
+                //if (pathExists)
+                //{
+                //    FollowPathToPlayer();
+                //}
+                //else if (!pathExists)
+                //{
+                //    SearchForPath();
+                //}
             }
             boredomDelay -= 1 * Time.deltaTime;
         }
@@ -66,13 +87,10 @@ public class ChasePlayer : MonoBehaviour
         {
             
         }
-        else if (boredTimer<=(timerHolder-10))
-        {
-            GotBored();
-        }
-        else if (boredomDelay <= 0)
+        else if (boredomDelay <= 0 && !gettingBored)
         {
             gettingBored = true;
+
         }
 
     }
@@ -92,6 +110,13 @@ public class ChasePlayer : MonoBehaviour
             boredTimer = timerHolder;
 
             boredomDelay = boredomDelayHolder;
+
+            //if (pathExists)
+            //{
+            //    pathToPlayer.Clear();
+            //    firstInput = true;
+            //}
+            //pathExists = false;
 
             return true;
         }
@@ -116,23 +141,14 @@ public class ChasePlayer : MonoBehaviour
 
             boredomDelay = boredomDelayHolder;
 
+            //if (pathExists)
+            //{
+            //    pathToPlayer.Clear();
+            //    firstInput = true;
+            //}
+
             return true;
         }
-
-        return false;
-    }
-
-    //Handles the "bored" timer of the monster and sends it back to the start if it can't find the player
-    private bool GotBored()
-    {
-        if (boredTimer<=0)
-        {
-            monsterTarget.UpdateTargetbyNode(true);
-            lastKnownPosition = startArea;
-            return true;
-        }
-
-        monsterTarget.UpdateTargetbyNode(false);
 
         return false;
     }
@@ -141,4 +157,58 @@ public class ChasePlayer : MonoBehaviour
     {
         gameStarted = true;
     }
+
+    //public void FollowPathToPlayer()
+    //{
+    //    monsterTarget.UpdateTarget(pathToPlayer[0]);
+    //}
+
+    //public void UpdatePathToPlayer(List<Vector3> input)
+    //{
+    //    pathToPlayer = input;
+
+    //    for (int i = 0; i < allNodes.Length; i++)
+    //    {
+    //        allNodes[i].Deactivate();
+    //    }
+    //}
+
+    //void FindNearestNode()
+    //{
+    //    pathExists = true;
+
+    //    float lenght = 9999.0f;
+
+    //    MonsterPathing nearestNode = null;
+
+    //    for (int i = 0; i < allNodes.Length; i++)
+    //    {
+    //        if (Mathf.Abs((transform.position - allNodes[i].transform.position).magnitude) < lenght)
+    //        {
+    //            lenght = Mathf.Abs((this.transform.position - allNodes[i].transform.position).magnitude);
+    //            nearestNode = allNodes[i];
+    //        }
+    //    }
+
+    //    startingNode = nearestNode;
+    //}
+
+    //public void UpdateNode()
+    //{
+    //    pathToPlayer.RemoveAt(0);
+    //    if (pathToPlayer.Count <= 0)
+    //    {
+    //        firstInput = true;
+    //    }
+    //}
+
+    //void SearchForPath()
+    //{
+    //    FindNearestNode();
+    //    player.FindNearestNode();
+
+    //    temp.InitialValues(startingNode, player.nearestNode, 0);
+
+    //    Instantiate(temp, startingNode.transform, startingNode.transform);
+    //}
 }

@@ -17,7 +17,7 @@ public class MonsterPathing : MonoBehaviour
 
     Vector3 currentTarget;
 
-    bool zPosition, xPosition, activeNode = false;
+    public bool activated = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,207 +27,14 @@ public class MonsterPathing : MonoBehaviour
         targetingData = FindObjectOfType<FollowPlayerMainMonster>();
     }
 
-    public void MoveToNodePlayer()
+
+    public void Deactivate()
     {
-        if (transform.position.z < targetPlayer.gameObject.transform.position.z)
-        {
-            zPosition = true;
-        }
-        else
-        {
-            zPosition = false;
-        }
-
-        if (transform.position.x > targetPlayer.gameObject.transform.position.x)
-        {
-            xPosition = true;
-        }
-        else
-        {
-            xPosition = false;
-        }
-
-        //If the player is North and West
-        if (zPosition && xPosition)
-        {
-            //If the distance North is greater than the distance West
-            if (Mathf.Abs(transform.position.z - targetPlayer.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - targetPlayer.gameObject.transform.position.x))
-            {
-                NorthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(NorthNode.transform.position);
-            }
-            //If the distance West is greater than the distance North
-            else
-            {
-                WestNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(WestNode.transform.position);
-            }
-        }
-        //If the player is South and West
-        else if (!zPosition && xPosition)
-        {
-            //If the distance South is greater than the distance West
-            if (Mathf.Abs(transform.position.z - targetPlayer.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - targetPlayer.gameObject.transform.position.x))
-            {
-                SouthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(SouthNode.transform.position);
-            }
-            //If the distance West is greater than the distance South
-            else
-            {
-                WestNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(WestNode.transform.position);
-            }
-        }
-        //If the player is North and East
-        else if (zPosition && !xPosition)
-        {
-            //If the distance North is greater than the distance East
-            if (Mathf.Abs(transform.position.z - targetPlayer.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - targetPlayer.gameObject.transform.position.x))
-            {
-                NorthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(NorthNode.transform.position);
-            }
-            //If the distance East is greater than the distance North
-            else
-            {
-                EastNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(EastNode.transform.position);
-            }
-        }
-        //If the player is South and East
-        else
-        {
-            //If the distance South is greater than the distance East
-            if (Mathf.Abs(transform.position.z - targetPlayer.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - targetPlayer.gameObject.transform.position.x))
-            {
-                SouthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(SouthNode.transform.position);
-            }
-            //If the distance East is greater than the distance South
-            else
-            {
-                EastNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(EastNode.transform.position);
-            }
-        }
+        activated = false;
     }
 
-    public void MoveToNodeHome()
+    public void Activate()
     {
-        if (transform.position.z < startingPosition.startArea.z)
-        {
-            zPosition = true;
-        }
-        else
-        {
-            zPosition = false;
-        }
-
-        if (transform.position.x > startingPosition.startArea.x)
-        {
-            xPosition = true;
-        }
-        else
-        {
-            xPosition = false;
-        }
-
-        //If the starting position is North and West
-        if (zPosition && xPosition)
-        {
-            //If the distance North is greater than the distance West
-            if (Mathf.Abs(transform.position.z - startingPosition.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - startingPosition.gameObject.transform.position.x))
-            {
-                NorthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(NorthNode.transform.position);
-            }
-            //If the distance West is greater than the distance North
-            else
-            {
-                WestNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(WestNode.transform.position);
-            }
-        }
-        //If the starting position is South and West
-        else if (!zPosition && xPosition)
-        {
-            //If the distance South is greater than the distance West
-            if (Mathf.Abs(transform.position.z - startingPosition.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - startingPosition.gameObject.transform.position.x))
-            {
-                SouthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(SouthNode.transform.position);
-            }
-            //If the distance West is greater than the distance South
-            else
-            {
-                WestNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(WestNode.transform.position);
-            }
-        }
-        //If the starting position is North and East
-        else if (zPosition && !xPosition)
-        {
-            //If the distance North is greater than the distance East
-            if (Mathf.Abs(transform.position.z - startingPosition.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - startingPosition.gameObject.transform.position.x))
-            {
-                NorthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(NorthNode.transform.position);
-            }
-            //If the distance East is greater than the distance North
-            else
-            {
-                EastNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(EastNode.transform.position);
-            }
-        }
-        //If the starting position is South and East
-        else
-        {
-            //If the distance South is greater than the distance East
-            if (Mathf.Abs(transform.position.z - startingPosition.gameObject.transform.position.z) > Mathf.Abs(transform.position.x - startingPosition.gameObject.transform.position.x))
-            {
-                SouthNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(SouthNode.transform.position);
-            }
-            //If the distance East is greater than the distance South
-            else
-            {
-                EastNode.SetActiveNode();
-                SetActiveNode();
-                targetingData.UpdateNodePosition(EastNode.transform.position);
-            }
-        }
-
+        activated = true;
     }
-
-    public void SetActiveNode()
-    {
-
-        if (activeNode)
-        {
-            activeNode = false;
-        }
-    }
-
-    public bool GetActive()
-    {
-        return activeNode;
-    }
-
 }
